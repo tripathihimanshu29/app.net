@@ -1,0 +1,142 @@
+using System;
+using System.Collections.Generic;
+
+namespace ECommerceSystem
+{
+    // Models
+    public class User
+    {
+        public int Id { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+    }
+
+    public class Product
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public decimal Price { get; set; }
+        public int Quantity { get; set; }
+    }
+
+    public class Order
+    {
+        public int Id { get; set; }
+        public User User { get; set; }
+        public List<Product> Products { get; set; }
+        public decimal TotalPrice { get; set; }
+    }
+
+    // Services
+    public class AuthenticationService
+    {
+        public User Login(string username, string password)
+        {
+            // Authenticate the user against the database or other data source
+            // Return the authenticated user or null if authentication fails
+        }
+    }
+
+    public class ProductService
+    {
+        public List<Product> GetProducts()
+        {
+            // Retrieve products from the database or other data source
+            // Return a list of products
+        }
+
+        public void AddProduct(Product product)
+        {
+            // Save the product to the database or other data source
+        }
+
+        public void UpdateProduct(Product product)
+        {
+            // Update the product in the database or other data source
+        }
+
+        public void DeleteProduct(int productId)
+        {
+            // Delete the product from the database or other data source
+        }
+    }
+
+    public class OrderService
+    {
+        public Order CreateOrder(User user, List<Product> products)
+        {
+            // Create a new order with the user and products
+            // Calculate the total price
+            // Save the order to the database or other data source
+            // Return the created order
+        }
+    }
+
+    // Application
+    public class Program
+    {
+        private static User currentUser;
+        private static AuthenticationService authService;
+        private static ProductService productService;
+        private static OrderService orderService;
+
+        public static void Main()
+        {
+            authService = new AuthenticationService();
+            productService = new ProductService();
+            orderService = new OrderService();
+
+            Login();
+            MainMenu();
+        }
+
+        private static void Login()
+        {
+            Console.WriteLine("Enter your username: ");
+            string username = Console.ReadLine();
+
+            Console.WriteLine("Enter your password: ");
+            string password = Console.ReadLine();
+
+            currentUser = authService.Login(username, password);
+
+            if (currentUser == null)
+            {
+                Console.WriteLine("Login failed. Please try again.");
+                Login();
+            }
+            else
+            {
+                Console.WriteLine($"Welcome, {currentUser.Username}!");
+            }
+        }
+
+        private static void MainMenu()
+        {
+            Console.WriteLine("\n--- Main Menu ---");
+            Console.WriteLine("1. View Products");
+            Console.WriteLine("2. Add Product");
+            Console.WriteLine("3. Place Order");
+            Console.WriteLine("4. Logout");
+
+            Console.WriteLine("Enter your choice: ");
+            string choice = Console.ReadLine();
+
+            switch (choice)
+            {
+                case "1":
+                    ViewProducts();
+                    break;
+                case "2":
+                    AddProduct();
+                    break;
+                case "3":
+                    PlaceOrder();
+                    break;
+                case "4":
+                    Logout();
+                    break;
+                default:
+                    Console.WriteLine("Invalid choice. Please try again.");
+                    MainMenu
+
